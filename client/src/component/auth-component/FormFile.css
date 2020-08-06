@@ -1,0 +1,87 @@
+.container-form-auth {
+   margin: 0;
+   padding: 0;
+   text-align: center;
+   background-size: cover;
+   background:url('../../pic/1567838.jpg');
+   background-position: center;
+   min-height: 100vh;
+   font-family: sans-serif;
+}
+
+.container-title {
+   margin-top: 100px;
+   color: rgba(78, 53, 53, 0.555);
+   text-transform: uppercase;
+   transition: all 4s ease-in-out;
+   margin: 0;
+   padding: 0;
+}
+
+.container-title h1{
+   margin: 0;
+   padding-top: 100px;
+   font-size: 32px;
+   line-height: 10px;
+}
+
+.form-formik {
+   margin-top: 50px;
+   transition: all 4s ease-in-out;
+}
+
+.form-control {
+   width: 600px;
+   background: transparent;
+   border: none;
+   outline: none;
+   border-bottom: 1px solid rgb(110, 68, 68);
+   color: rgb(139, 85, 85);
+   font-size: 18px;
+   margin-bottom: 16px;
+}
+
+.form-control {
+   height: 45px;
+}
+
+.submit-login {
+   background: #ff5722;
+   border-color: transparent;
+   color: #fff;
+   font-size: 20px;
+   font-weight: bold;
+   letter-spacing: 2px;
+   height: 50px;
+   margin-top: 20px;
+   border-radius: 10%;
+}
+
+.submit-login:hover {
+   background-color: #f44336;
+   cursor: pointer;
+}
+
+.error-form-login {
+   margin-top: 30px;
+   font-size: 20px;
+   color: rgb(241, 97, 97);
+}
+
+.sign-up-button {
+   background: #12ec36;
+   border-color: transparent;
+   color: rgb(247, 243, 243);
+   font-size: 15px;
+   font-weight: bold;
+   letter-spacing: 0.5px;
+   height: 30px;
+   margin-top: 20px;
+   border-radius: 10%;
+   text-decoration: none;
+}
+
+.sign-up-button:hover {
+   background-color: #63f086;
+   cursor: pointer;
+}
