@@ -46,7 +46,7 @@
 }
 
 .submit-login {
-   background: #ff5722;
+   background: #018DC8;
    border-color: transparent;
    color: #fff;
    font-size: 20px;
@@ -58,7 +58,7 @@
 }
 
 .submit-login:hover {
-   background-color: #f44336;
+   background-color: #4267B2;
    cursor: pointer;
 }
 

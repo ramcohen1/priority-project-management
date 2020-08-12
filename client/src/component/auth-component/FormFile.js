@@ -25,14 +25,21 @@ const displayFileUserName = () => {
          name='userName'
          type="text" />
       <br />
-      <div>
-         <Link to="/">
-            <button className="sign-up-button">
-               התחברות
-         </button>
-         </Link>
-      </div>
    </>
+   )
+}
+
+const displayButtonLogin = () => {
+   return (
+      <>
+         <div>
+            <Link to="/">
+               <button className="sign-up-button">
+                  התחברות
+         </button>
+            </Link>
+         </div>
+      </>
    )
 }
 
@@ -46,10 +53,9 @@ const displayButtonRegistration = () => {
          </Link>
       </div>
    );
-
 }
 
-const displayForm = (form, header, inputs) => {
+const displayForm = (form, header, inputs, endpoint, operator) => {
    return (
       <div className="container-form-auth">
          <div className="container-title">
@@ -63,7 +69,6 @@ const displayForm = (form, header, inputs) => {
                validationSchema={validationSchema}
                onSubmit={(data, { setSubmitting, resetForm }) => {
                   setSubmitting(true)
-                  console.log(data)
                   setSubmitting(false)
                   resetForm()
                }}>
@@ -76,17 +81,18 @@ const displayForm = (form, header, inputs) => {
                         name="email"
                         type="email" />
                      <br />
-                     {console.log(touched)}
+                     {form === 'registration' ? displayFileUserName() : null}
                      <Field
                         className="form-control"
                         autoComplete="off"
                         placeholder="password"
                         name="password"
                         type="password" />
-                     {form === 'registration' ? displayFileUserName() : null}
-                     {form === 'login' ? displayButtonRegistration() : null}
+                     <br />
                      <br />
                      <button className="submit-login" disabled={isSubmitting} type="submit">{header}</button>
+                     {form === 'registration' ? displayButtonLogin() : null}
+                     {form === 'login' ? displayButtonRegistration() : null}
                      <div className="error-form-login">
                         {errors ? displayErrors(errors, touched) : null}
                      </div>
@@ -100,11 +106,9 @@ const displayForm = (form, header, inputs) => {
 
 function FormFile(props) {
 
-   const { form, header, inputs } = props
+   const { form, header, inputs, endpoint, operator } = props
 
-   console.log(form)
-   console.log(inputs)
-   return <>{displayForm(form, header, inputs)}</>
+   return <>{displayForm(form, header, inputs, endpoint, operator)}</>
 }
 
 export default FormFile

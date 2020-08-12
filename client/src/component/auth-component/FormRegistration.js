@@ -6,6 +6,8 @@ function FormRegistration() {
       <>
          <FormFile
             inputs={{ email: "", password: "", userName: "" }}
+            operator="post"
+            endpoint="/users"
             form="registration"
             header="הרשמה" />
       </>
