@@ -3,17 +3,26 @@ import { Form, Field, Formik } from 'formik'
 import './FormFile.css'
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
+import history from '../../history'
 
-const validationSchema = yup.object({
-   email: yup.string().email().required(),
-   password: yup.string().required("Please provide a valid password"),
-   userName: yup.string().required()
-})
+const validationSchema = (form) => {
+   const yupObj = {
+      email: yup.string().email().required(),
+      password: yup.string().min(8).required("Please provide a valid password"),
 
-const displayErrors = (errors, touched) => {
+   }
+
+   if (form === 'registration') yupObj.user = yup.string().required()
+
+   return yup.object({ ...yupObj })
+}
+
+const displayErrors = (errors, touched, form) => {
    if (errors.email && touched.email) return <>{errors.email}</>
    if (errors.password && touched.password) return <>{errors.password}</>
-   if (errors.userName && touched.userName) return <>user name is required</>
+   if (form === 'registration') {
+      if (errors.user && touched.user) return <>user name is required</>
+   }
 }
 
 const displayFileUserName = () => {
@@ -22,7 +31,7 @@ const displayFileUserName = () => {
          className="form-control"
          autoComplete="off"
          placeholder="user name"
-         name='userName'
+         name='user'
          type="text" />
       <br />
    </>
@@ -31,15 +40,13 @@ const displayFileUserName = () => {
 
 const displayButtonLogin = () => {
    return (
-      <>
-         <div>
-            <Link to="/">
-               <button className="sign-up-button">
-                  התחברות
+      <div>
+         <Link to="/">
+            <button className="sign-up-button">
+               התחברות
          </button>
-            </Link>
-         </div>
-      </>
+         </Link>
+      </div>
    )
 }
 
@@ -55,7 +62,9 @@ const displayButtonRegistration = () => {
    );
 }
 
-const displayForm = (form, header, inputs, endpoint, operator) => {
+const displayForm = (form, header, inputs, sendRegistration,
+   registerMessage, errorEmail, sendLogin) => {
+
    return (
       <div className="container-form-auth">
          <div className="container-title">
@@ -66,11 +75,36 @@ const displayForm = (form, header, inputs, endpoint, operator) => {
             <Formik
                className="form-formik"
                initialValues={{ ...inputs }}
-               validationSchema={validationSchema}
-               onSubmit={(data, { setSubmitting, resetForm }) => {
+               validationSchema={validationSchema(form)}
+               onSubmit={async (data, { setSubmitting, resetForm }) => {
+                  const { email, password } = data
                   setSubmitting(true)
-                  setSubmitting(false)
-                  resetForm()
+                  console.log(data)
+                  try {
+                     if (form === 'registration') {
+                        const { user } = data
+                        const response = await sendRegistration(email, password, user)
+                        if (response.status === 201) {
+                           setSubmitting(false)
+                           resetForm()
+                           history.push({
+                              pathname: '/',
+                              state: { detail: 'registration succeeded!' }
+                           })
+                        }
+                     }
+                     if (form === 'login') {
+                        const response = await sendLogin(email, password)
+                        if (response.status === 200) {
+                           setSubmitting(false)
+                           history.push({
+                              pathname: '/main-page'
+                           })
+                        }
+                     }
+                  } catch (error) {
+                     console.log(error)
+                  }
                }}>
                {({ values, errors, isSubmitting, touched }) => (
                   <Form>
@@ -94,21 +128,28 @@ const displayForm = (form, header, inputs, endpoint, operator) => {
                      {form === 'registration' ? displayButtonLogin() : null}
                      {form === 'login' ? displayButtonRegistration() : null}
                      <div className="error-form-login">
-                        {errors ? displayErrors(errors, touched) : null}
+                        {errors ? displayErrors(errors, touched, form) : null}
+                        {errorEmail ? <div style={{ color: 'red' }}>{errorEmail}</div> : null}
+                        {registerMessage ?
+                           <div style={{ color: 'green' }}>{registerMessage}</div>
+                           : null}
                      </div>
                   </Form>
                )}
             </Formik>
          </div>
-      </div>
+      </div >
    );
 }
 
 function FormFile(props) {
 
-   const { form, header, inputs, endpoint, operator } = props
+   const { form, header, inputs, registerMessage,
+      sendRegistration, errorEmail, sendLogin } = props
 
-   return <>{displayForm(form, header, inputs, endpoint, operator)}</>
+   return <>{displayForm(form, header, inputs,
+      sendRegistration, registerMessage, errorEmail,
+      sendLogin)}</>
 }
 
 export default FormFile

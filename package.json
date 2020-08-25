@@ -1,0 +1,22 @@
+{
+  "name": "priority-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server":"cd ./server && npm run dev",
+    "db" : "/Users/rofvi/mongodb/bin/mongod.exe --dbpath=/Users/rofvi/mongodb-data",
+    "client": "cd client && npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramcohen1/priority-project-management.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramcohen1/priority-project-management/issues"
+  },
+  "homepage": "https://github.com/ramcohen1/priority-project-management#readme"
+}

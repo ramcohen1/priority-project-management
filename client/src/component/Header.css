@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+body {
+   overflow: auto;
+   font-family: 'Roboto', sans-serif;
+}
+
+.main-header ul {
+   list-style: none;
+}
+
+.main-header a {
+   text-decoration: none;
+}
+
+.main-header {
+   position: sticky;
+   top: 0px;
+   background-color: #60b4df;
+   width: 100%;
+   z-index: 1000;
+}
+
+.main-header .header-container {
+   max-width: 64rem;
+   /* background-color: #fff; */
+   padding: 0 2rem;
+   height: 3rem;
+   margin: 0 auto;
+   display: flex;
+}
+
+.logo-container {
+   flex: 1;
+   display: flex;
+   align-items: center;
+   background-color: #60b4df;
+}
+
+.nav-btn {
+   flex: 3;
+   display: flex;
+}
+
+.nav-links {
+   flex:1;
+}
+
+.logout {
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   flex: 1;
+   background-color: #60b4df;
+}
+
+.btn-logout {
+   display: inline-block;
+   padding: .5rem 1.3rem;
+   font-size: .8rem;
+   border: 2px solid #fff;
+   border-radius: 2rem;
+   line-height: 1;
+   margin: 0 .2rem;
+   transition: .3s;
+   text-transform: uppercase;
+   color: #fff;
+}
+
+.btn-logout:hover{
+   background-color: #69bde7 ;
+   color: #fff;
+} 
+
+.btn-logout:hover{
+   background-color: #fff;
+   color: #69bde7;
+} 
+
+.nav-links > ul{
+   background-color: #60b4df;
+   display: flex;
+   justify-content: flex-end;
+   justify-items: flex-end;
+}
+
+.nav-link > a{
+   line-height: 3rem;
+   color: #fff;
+   padding: 0 .8rem;
+   letter-spacing: 1px;
+   font-size: .95rem;
+   display: flex;
+   align-items: center;
+   align-content: center;
+}
+
+.nav-link{
+   position: relative;
+}
+
+.dropdown{
+   position: absolute;
+   top: 100%;
+   left: 0;
+   width: 10rem;
+   transform: translateY(10px);
+   opacity: 0;
+   pointer-events: none;
+   transition: .5s;
+}
+
+.dropdown-link > a{
+   display: flex;
+   background-color: #69bde7;
+   color: #fff;
+   padding: .5rem 1.5rem;
+   font-size: 1rem;
+   transition: .3s;
+}
+
+.dropdown-link:hover > a{
+   background-color: #3498db;
+   color: #fff;
+}
+
+.dropdown-link:not(:nth-last-child(0)){
+   border-bottom: 1px solid #efefef;
+   border-right:1px solid #efefef;
+}
+
+.dropdown-link{
+   position: relative;
+}
+
+.dropdown.second{
+   top:0;
+   left:-100%;
+}
+
+.nav-link:hover > .dropdown,
+.dropdown-link:hover > .dropdown{
+   transform: translate(0, 0);
+   opacity: 1;
+   pointer-events: auto;
+}
+
+.none-link{
+   pointer-events: none;
+}

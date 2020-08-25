@@ -12,8 +12,12 @@ router.post('/users', async (req, res) => {
       await user.save()
 
       res.status(201).send({ user, token })
-   } catch (e) {
-      res.status(400).send(e)
+   } catch (error) {
+      if (error.name === 'MongoError' && error.code === 11000) {
+         res.status(400).send({'error': 'email must be unique'})
+       } else {
+          res.status(400).send(error)
+       }
    }
 })
 
